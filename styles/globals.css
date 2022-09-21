@@ -3,8 +3,10 @@
 @tailwind utilities;
 
 body {
-  @apply bg-[#0F0F0F];
+  @apply bg-indigo-100 h-screen flex items-center justify-center;
 }
-button, input, textarea {
+button,
+input,
+textarea {
   @apply focus:outline-none;
 }
