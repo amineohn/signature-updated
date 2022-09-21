@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-[#0F0F0F];
+}
+button, input, textarea {
+  @apply focus:outline-none;
+}
