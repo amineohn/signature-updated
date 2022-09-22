@@ -42,7 +42,10 @@ const Home: NextPage = () => {
           `Current progress:`,
           Math.round((event.loaded * 100) / event.total)
         );
-        setEventLoaded((event.loaded * 100) / event.total);
+        setEventLoaded(
+          ((event.loaded * 100).toString().replace("/d+/g", "") as any) /
+            event.total
+        );
         setUploadData(Math.round(eventLoaded));
       });
       console.log("response", response);
