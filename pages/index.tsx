@@ -8,6 +8,7 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import type { NextPage } from "next";
+import axios from "axios";
 const Home: NextPage = () => {
   const cancelButtonRef = useRef(null);
 
@@ -44,18 +45,40 @@ const Home: NextPage = () => {
       form.role &&
       form.mail &&
       form.professionalNumber &&
-      form.number &&
-      form.link
+      form.number
     ) {
-      fetch("/api/preview", {
-        method: "POST",
-        body: JSON.stringify(form),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          setShowModal(true);
-        });
+      const params = new URLSearchParams();
+      params.append("firstName", form.firstName);
+      params.append("lastName", form.lastName);
+      params.append("role", form.role);
+      params.append("mail", form.mail);
+      params.append("professionalNumber", form.professionalNumber);
+      params.append("number", form.number);
+      params.append("link", form.link);
+
+      const input = document.getElementById("avatar");
+
+      input?.addEventListener("change", (event) => {
+        const target = event.target as HTMLInputElement;
+
+        params.append("file", target.files[0].name);
+      });
+
+      setForm({
+        firstName: form.firstName,
+        lastName: form.lastName,
+        role: form.role,
+        mail: form.mail,
+        professionalNumber: form.professionalNumber,
+        number: form.number,
+        link: form.link,
+        file: "",
+      });
+      axios.post("/api/preview", params).then((res) => {
+        console.log(res);
+        console.log(res.data);
+        setShowModal(true);
+      });
       setIsSubmitted(true);
       console.log(form);
     } else {

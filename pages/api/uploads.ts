@@ -23,12 +23,12 @@ export type ApiResponse<T, E = unknown> =
 type ResponseData = ApiResponse<string[], string>;
 
 const oneMegabyteInBytes = 1000000;
-const outputFolderName = "./public/uploads";
+const outputFolderName = "./public/static/generated/uploads";
 
 const upload = multer({
   limits: { fileSize: oneMegabyteInBytes * 2 },
   storage: multer.diskStorage({
-    destination: "./public/uploads",
+    destination: "./public/static/generated/uploads",
     filename: (req, file, cb) => cb(null, file.originalname),
   }),
 });
