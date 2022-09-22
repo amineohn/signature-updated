@@ -54,7 +54,9 @@ apiRoute.post(
   (req: NextConnectApiRequest, res: NextApiResponse<ResponseData>) => {
     const filenames = fs.readdirSync(outputFolderName);
     const images = filenames.map((name) => name);
-
+    req.files.forEach((file) => {
+      fs.unlinkSync(file.path);
+    });
     res.status(200).json({ data: images });
   }
 );
