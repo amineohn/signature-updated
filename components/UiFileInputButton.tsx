@@ -34,16 +34,7 @@ export const UiFileInputButton: React.FC<IProps> = (props) => {
 
   return (
     <form ref={formRef}>
-      <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-        <input
-          type="file"
-          accept={props.acceptedFileTypes}
-          multiple={props.allowMultipleFiles}
-          name={props.uploadFileName}
-          onChange={onChangeHandler}
-          className="hidden"
-          ref={fileInputRef}
-        />
+      <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed hover:border-indigo-400 transition cursor-pointer rounded-md">
         <div className="space-y-1 text-center">
           <svg
             className="mx-auto h-12 w-12 text-gray-400"
@@ -67,7 +58,6 @@ export const UiFileInputButton: React.FC<IProps> = (props) => {
               <span>Upload a file</span>
               <input
                 id="file-upload"
-                name="file-upload"
                 type="file"
                 accept={props.acceptedFileTypes}
                 multiple={props.allowMultipleFiles}
@@ -78,7 +68,7 @@ export const UiFileInputButton: React.FC<IProps> = (props) => {
             </label>
             <p className="pl-1">or drag and drop</p>
           </div>
-          <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+          <p className="text-xs text-gray-500">CSV up to 1GB</p>
         </div>
       </div>
     </form>
