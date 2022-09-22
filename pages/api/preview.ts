@@ -15,7 +15,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     .replace(`{{number}}`, req.body.number)
     .replace(`{{link}}`, req.body.link)
     .replace(`{{file}}`, req.body.file);
-  fs.writeFileSync(`./public/static/generated/index.html`, fixedIndex);
+  fs.writeFileSync(`./public/static/generated/index.html`, replacedIndex);
 
   const zip = new AdmZip();
   zip.addLocalFolder(`./public`);
