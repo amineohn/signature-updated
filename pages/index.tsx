@@ -115,7 +115,7 @@ const Home: NextPage = () => {
           </Transition>
         </div>
       </div>
-      <div className="space-y-6 max-w-4xl m-auto py-4 container">
+      <div className="space-y-6 max-w-2xl md:max-w-4xl m-auto py-4 container">
         <form onSubmit={onSubmit}>
           <div className="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
             <div className="md:grid md:grid-cols-3 md:gap-6">
@@ -350,9 +350,12 @@ const Home: NextPage = () => {
                     </Dialog.Title>
                     <div className="mt-2">
                       <iframe
-                        src={`/api/preview`}
-                        className="w-80 h-48 m-auto rounded-md"
-                      ></iframe>
+                        src={`http://${
+                          typeof window !== "undefined" &&
+                          window.location.hostname
+                        }:3000/api/preview`}
+                        className="w-80 h-60 m-auto rounded-md"
+                      />
                     </div>
                   </div>
                 </div>

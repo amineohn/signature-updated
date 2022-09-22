@@ -82,6 +82,22 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     if (err) throw err;
     const file = new AdmZip();
     file.addLocalFolder(`./public`);
-    file.writeZip(`./public/static/extracted/signature.zip`);
+    const date = new Date();
+    const hash =
+      date.getDay() +
+      "-" +
+      date.getMonth() +
+      "-" +
+      date.getFullYear() +
+      "-" +
+      date.getHours() +
+      "-" +
+      date.getMinutes() +
+      "-" +
+      date.getSeconds();
+
+    file.writeZip(`./public/static/extracted/preview-${hash}.zip`);
   });
+  const file = fs.readFileSync(`./public/static/generated/index.html`, "utf8");
+  res.status(200).send(file);
 }
