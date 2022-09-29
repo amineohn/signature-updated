@@ -17,9 +17,11 @@ import {
 } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import axios from "axios";
+import parser from "react-html-parser";
+
 const Home: NextPage = () => {
   const cancelButtonRef = useRef(null);
-
+  const [data, setData] = useState(null);
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -76,7 +78,6 @@ const Home: NextPage = () => {
 
       input?.addEventListener("change", (event) => {
         const target = event.target as HTMLInputElement;
-
         params.append("file", target.files[0].name);
       });
 
@@ -91,8 +92,8 @@ const Home: NextPage = () => {
         file: "",
       });
       axios.post("/api/preview", params).then((res) => {
-        console.log(res);
         console.log(res.data);
+        setData(res.data);
         setShowModal(true);
       });
       setIsSubmitted(true);
@@ -122,6 +123,7 @@ const Home: NextPage = () => {
       }
     }, 1);
   });
+
   return (
     <>
       <div
@@ -471,15 +473,10 @@ const Home: NextPage = () => {
                     >
                       Preview
                     </Dialog.Title>
-                    <div className="mt-2">
-                      <iframe
-                        src={`http://${
-                          typeof window !== "undefined" &&
-                          window.location.hostname
-                        }:3000/api/preview`}
-                        className="w-80 h-60 m-auto rounded-md"
-                      />
-                    </div>
+                    <div
+                      className="mt-2"
+                      dangerouslySetInnerHTML={{ __html: data }}
+                    />
                   </div>
                 </div>
                 <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
